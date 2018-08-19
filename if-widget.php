@@ -42,3 +42,4 @@ add_filter('if_visibility_rules', '\Layered\IfWidget\VisibilityRules::page');
 add_filter('if_visibility_rules', '\Layered\IfWidget\VisibilityRules::url');
 add_filter('if_visibility_rules', '\Layered\IfWidget\VisibilityRules::device');
 
+add_action('plugins_loaded', '\Layered\IfWidget\WidgetVisibility::start');
