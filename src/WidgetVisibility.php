@@ -11,6 +11,7 @@ class WidgetVisibility {
 		add_action('admin_enqueue_scripts', [$this, 'assets']);
 		add_action('in_widget_form', [$this, 'form'], 100, 3);
 		add_action('widget_update_callback', [$this, 'update'], 10, 2);
+		add_action('widget_display_callback', [$this, 'checkWidgetVisibility'], 10, 2);
 	}
 
 	public function assets() {
@@ -90,6 +91,60 @@ class WidgetVisibility {
 			$instance['if-widget'] = $newInstance['if-widget'];
 		} else {
 			unset($instance['if-widget']);
+		}
+
+		return $instance;
+	}
+
+	public function checkWidgetVisibility(array $instance, \WP_Widget $widget) {
+
+		if (isset($instance['if-widget'])) {
+			$visibilityRules = json_decode($instance['if-widget'], true);
+			$rules = apply_filters('if_visibility_rules', []);
+
+			$visibilityRules = array_map(function($visibilityRule) use($rules) {
+				if ($visibilityRule['type'] === 'rule') {
+					$rule = $rules[$visibilityRule['rule']];
+
+					if ($rule['type'] === 'bool') {
+						$visibilityRule['result'] = call_user_func($rule['callback']);
+						$visibilityRule['result'] = $visibilityRule['values'][0] ? $visibilityRule['result'] : !$visibilityRule['result'];
+						$visibilityRule = $visibilityRule['result'] ? 1 : 0;
+					} elseif ($rule['type'] === 'select') {
+						$visibilityRule['result'] = call_user_func($rule['callback'], $visibilityRule['values'][1]);
+						$visibilityRule['result'] = $visibilityRule['values'][0] ? $visibilityRule['result'] : !$visibilityRule['result'];
+						$visibilityRule = $visibilityRule['result'] ? 1 : 0;
+					} elseif ($rule['type'] === 'multiple') {
+						$visibilityRule['result'] = call_user_func($rule['callback'], $visibilityRule['values'][1]);
+						$visibilityRule['result'] = $visibilityRule['values'][0] ? $visibilityRule['result'] : !$visibilityRule['result'];
+						$visibilityRule = $visibilityRule['result'] ? 1 : 0;
+					} elseif ($rule['type'] === 'text') {
+						$text = call_user_func($rule['callback']);
+
+						if ($visibilityRule['values'][0] == 'starts') {
+							$visibilityRule['result'] = substr($text, 0, strlen($visibilityRule['values'][1])) === $visibilityRule['values'][1];
+						} elseif ($visibilityRule['values'][0] == 'ends') {
+							$visibilityRule['result'] = substr($text, -strlen($visibilityRule['values'][1])) === $visibilityRule['values'][1];
+						} elseif ($visibilityRule['values'][0] == 'contains') {
+							$visibilityRule['result'] = strpos($text, $visibilityRule['values'][1]) !== false;
+						} elseif ($visibilityRule['values'][0] == 1) {
+							$visibilityRule['result'] = $text == $visibilityRule['values'][1];
+						} elseif ($visibilityRule['values'][0] == 0) {
+							$visibilityRule['result'] = $text != $visibilityRule['values'][1];
+						}
+
+						$visibilityRule = $visibilityRule['result'] ? 1 : 0;
+					}
+				} else {
+					$visibilityRule = $visibilityRule['op'];
+				}
+
+				return $visibilityRule;
+			}, $visibilityRules);
+
+			if ((count($visibilityRules) === 1 && $visibilityRules[0] == 0) || (count($visibilityRules) > 1 && !eval('return ' . implode(' ', $visibilityRules) . ';'))) {
+				$instance = false;
+			}
 		}
 
 		return $instance;

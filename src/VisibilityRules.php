@@ -10,7 +10,7 @@ class VisibilityRules {
 		// Rule - user auth state
 		$rules['user-logged-in'] = [
 			'name'		=>	__('User %s logged in', 'if-widget'),
-			'condition'	=>	'is_user_logged_in',
+			'callback'	=>	'is_user_logged_in',
 			'group'		=>	__('User', 'if-widget')
 		];
 
@@ -24,9 +24,9 @@ class VisibilityRules {
 			'name'		=>	__('User role %s one of %s', 'if-widget'),
 			'type'		=>	'multiple',
 			'options'	=>	$roleOptions,
-			'condition'	=>	function($roleId) {
+			'callback'	=>	function(array $roles) {
 				global $current_user;
-				return is_user_logged_in() && in_array($roleId, $current_user->roles);
+				return is_user_logged_in() && count(array_intersect($roles, $current_user->roles));
 			},
 			'group'		=>	__('User', 'if-widget')
 		];
@@ -34,7 +34,7 @@ class VisibilityRules {
 		if (defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE === true) {
 			$rules['user-is-super-admin'] = [
 				'name'		=>	__('User %s Super Admin', 'if-widget'),
-				'condition'	=>	'is_super_admin',
+				'callback'	=>	'is_super_admin',
 				'group'		=>	__('User', 'if-widget')
 			];
 		}
@@ -54,9 +54,9 @@ class VisibilityRules {
 			'name'		=>	__('Post type %s one of %s', 'if-widget'),
 			'type'		=>	'multiple',
 			'options'	=>	$postTypes,
-			'condition'	=>	function(array $postTypes) {
-				global $current_user;
-				return is_user_logged_in() && in_array($roleId, $current_user->roles);
+			'callback'	=>	function(array $postTypes) {
+				global $post;
+				return isset($post, $post->post_type) && in_array($post->post_type, $postTypes);
 			},
 			'group'		=>	__('Page type', 'if-widget')
 		];
@@ -67,10 +67,12 @@ class VisibilityRules {
 			'name'		=>	__('Page %s %s', 'if-widget'),
 			'type'		=>	'select',
 			'options'	=>	[
-				'front_page'	=>	'Front Page',
-				'home'			=>	'Home'
+				'front_page'	=>	__('Front Page', 'if-widget'),
+				'home'			=>	__('Blog Page', 'if-widget')
 			],
-			'condition'	=>	'is_front_page',
+			'callback'	=>	function($selected) {
+				return $selected === 'front_page' ? is_front_page() : is_home();
+			},
 			'group'		=>	__('Page type', 'if-widget')
 		];
 
@@ -84,8 +86,8 @@ class VisibilityRules {
 			'name'			=>	__('URL %s %s', 'if-widget'),
 			'type'			=>	'text',
 			'placeholder'	=>	__('g.co/about', 'if-widget'),
-			'condition'		=>	function(array $postTypes) {
-				return false;
+			'callback'		=>	function() {
+				return 'http' . (is_ssl() ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 			},
 			'group'			=>	__('URL', 'if-widget')
 		];
@@ -98,8 +100,7 @@ class VisibilityRules {
 		// Visibility Rule - Is mobile
 		$rules['is-mobile'] = [
 			'name'			=>	__('Device %s mobile', 'if-widget'),
-			'type'			=>	'bool',
-			'condition'		=>	'wp_is_mobile',
+			'callback'		=>	'wp_is_mobile',
 			'group'			=>	__('Device', 'if-widget')
 		];
 
