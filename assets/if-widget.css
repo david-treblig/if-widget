@@ -16,6 +16,14 @@
 	margin-bottom: 15px;
 }
 
+.if-widget-visibility-rules[v-cloak] > * {
+	display:none;
+}
+
+.if-widget-visibility-rules[v-cloak]::before {
+	content: "Loading visibility control…";
+}
+
 .if-widget-visibility-rule {
 	background-color: #f5f7f7;
 	border: 1px solid #ddd;

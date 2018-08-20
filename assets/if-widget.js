@@ -13,16 +13,19 @@ jQuery(function($) {
 					rules: ifWidget.rules,
 					texts: ifWidget.texts,
 					enabled: $el.find('.if-widget-is-enabled').prop('checked'),
-					visibility: JSON.parse($el.find('.if-widget-the-rules').val())
+					visibility: JSON.parse($el.find('.if-widget-the-rules').val()),
+					shouldTriggerChange: false
 				},
 				created: function() {
 					var vm = this;
-					this.visibility.map(function(v) {
+
+					this.visibility.forEach(function(v, index) {
 						if (v.type == 'rule') {
-							v.rule = vm.rules[v.rule];
+							vm.$set(vm.visibility[index], 'rule', vm.rules[v.rule]);
+							vm.$set(vm.visibility[index], 'isOpen', false);
 						}
-						return v;
 					});
+
 					for (ruleId in this.rules) {
 						this.rules[ruleId].id = ruleId;
 					}
@@ -30,6 +33,13 @@ jQuery(function($) {
 				computed: {
 					vis: function() {
 						var q = JSON.parse(JSON.stringify(this.visibility));
+						if (this.$el) {
+							if (this.shouldTriggerChange) {
+								jQuery(this.$el).trigger('change');
+							} else {
+								this.shouldTriggerChange = true;
+							}
+						}
 						return JSON.stringify(q.map(function(v) {
 							if (v.type == 'rule') {
 								v.rule = v.rule.id;
@@ -41,9 +51,6 @@ jQuery(function($) {
 				},
 				methods: {
 					translate: function(str) {
-						if (!this.texts[str]) {
-							console.log(str, 'needs translation');
-						}
 						return this.texts[str] || str;
 					},
 					formatName: function(rule) {

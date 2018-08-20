@@ -9,7 +9,8 @@ class WidgetVisibility {
 
 	protected function __construct() {
 		add_action('admin_enqueue_scripts', [$this, 'assets']);
-		add_action('in_widget_form', [$this, 'form'], 1, 3);
+		add_action('in_widget_form', [$this, 'form'], 100, 3);
+		add_action('widget_update_callback', [$this, 'update'], 10, 2);
 	}
 
 	public function assets() {
@@ -40,22 +41,19 @@ class WidgetVisibility {
 	}
 
 	public function form(\WP_Widget $widget, $return, array $instance) {
-		$rules = apply_filters('if_visibility_rules', []);
-
 		$visibility = isset($instance['if-widget']) && $instance['if-widget'];
-		$visibilityRules = $visibility ? $instance['if-widget'] : [[
+		$visibilityRules = $visibility ? json_decode($instance['if-widget'], true) : [[
 			'type'		=>	'rule',
 			'rule'		=>	'user-logged-in',
-			'values'	=>	[1],
-			'isOpen'	=>	false
+			'values'	=>	[1]
 		]];
 		?>
 
 		<hr class="if-widget-line">
 
-		<div class="if-widget-visibility-rules" id="if-widget-visibility-rules-<?php echo $widget->id ?>">
+		<div class="if-widget-visibility-rules" id="if-widget-visibility-rules-<?php echo $widget->id ?>" v-cloak>
 			<p>
-				<label><input type="checkbox" name="<?php echo $widget->get_field_name('if-widget') ?>" class="if-widget-is-enabled" <?php checked($visibility) ?> v-model="enabled"> <?php _e('Show widget only if »', 'if-widget') ?></label>
+				<label><input type="checkbox" name="<?php echo esc_attr($widget->get_field_name('if-widget-enabled')) ?>" class="if-widget-is-enabled" <?php checked($visibility) ?> v-model="enabled"> <?php _e('Show widget only if »', 'if-widget') ?></label>
 			</p>
 
 			<div v-if="enabled">
@@ -80,10 +78,21 @@ class WidgetVisibility {
 				</div>
 			</div>
 
-			<input type="text" name="<?php echo $widget->get_field_name('if-widget-visibility') ?>" class="if-widget-the-rules" value='<?php echo json_encode($visibilityRules) ?>' v-model="vis">
+			<input type="hidden" name="<?php echo esc_attr($widget->get_field_name('if-widget')) ?>" class="if-widget-the-rules" value="<?php echo esc_attr(json_encode($visibilityRules)) ?>" v-model="vis">
 		</div>
 
 		<?php
+	}
+
+	public function update(array $instance, array $newInstance) {
+
+		if (isset($newInstance['if-widget-enabled'])) {
+			$instance['if-widget'] = $newInstance['if-widget'];
+		} else {
+			unset($instance['if-widget']);
+		}
+
+		return $instance;
 	}
 
 }
