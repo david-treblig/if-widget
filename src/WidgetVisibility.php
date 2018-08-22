@@ -37,7 +37,7 @@ class WidgetVisibility {
 				]
 			]);
 
-			wp_enqueue_style('if-widget', plugins_url('assets/if-widget.css', dirname(__FILE__)), ['wp-jquery-ui-dialog'], '0.1');
+			wp_enqueue_style('if-widget', plugins_url('assets/if-widget.css', dirname(__FILE__)), [], '0.1');
 		}
 	}
 
@@ -54,7 +54,8 @@ class WidgetVisibility {
 
 		<div class="if-widget-visibility-rules" id="if-widget-visibility-rules-<?php echo $widget->id ?>" v-cloak>
 			<p>
-				<label><input type="checkbox" name="<?php echo esc_attr($widget->get_field_name('if-widget-enabled')) ?>" class="if-widget-is-enabled" <?php checked($visibility) ?> v-model="enabled"> <?php _e('Show widget only if »', 'if-widget') ?></label>
+				<a href="<?php echo admin_url('themes.php?page=if-widget') ?>" class="if-widget-help" data-tooltip="<?php esc_attr_e('Visibility rule examples', 'if-widget') ?>" title="<?php esc_attr_e('Visibility rule examples', 'if-widget') ?>"><span class="dashicons dashicons-editor-help"></span></a>
+				<label><input type="checkbox" name="<?php echo esc_attr($widget->get_field_name('if-widget-enabled')) ?>" class="if-widget-is-enabled" <?php checked($visibility) ?> v-model="enabled"> <?php _e('Show widget only if', 'if-widget') ?> »</label>
 			</p>
 
 			<div v-if="enabled">
