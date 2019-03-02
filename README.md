@@ -23,7 +23,7 @@ The plugin is easy to use, each widget will have a “Show widget only if” opt
 * Multiple rules - mix multiple rules for a widget visibility
   * show if `User is logged in` AND `Device is mobile`
   * show if `User is Admin` AND `Is Front Fage`
-* Support for adding your custom rules
+* Support for adding custom visibility rules
 
 
 

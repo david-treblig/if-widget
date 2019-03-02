@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: If Widget - Visibility control for widgets
-Plugin URI: https://wordpress.layered.studio/if-widget
+Plugin Name: If Widget - Visibility control for Widgets
+Plugin URI: https://layered.market/plugins/if-widget
 Description: Display customised widgets to each visitor with visibility rules
-Version: 0.1
+Version: 0.2
 Text Domain: if-widget
 Author: Layered
-Author URI: https://layered.studio
+Author URI: https://layered.market
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 */
