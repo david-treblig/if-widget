@@ -37,10 +37,7 @@ if (!function_exists('ifVisibilityRulesPrepare')) {
 // start the plugin
 
 add_filter('if_visibility_rules', 'ifVisibilityRulesPrepare', 500);
-add_filter('if_visibility_rules', '\Layered\IfWidget\VisibilityRules::user');
-add_filter('if_visibility_rules', '\Layered\IfWidget\VisibilityRules::page');
-add_filter('if_visibility_rules', '\Layered\IfWidget\VisibilityRules::url');
-add_filter('if_visibility_rules', '\Layered\IfWidget\VisibilityRules::device');
+add_action('if_visibility_rules', '\Layered\IfWidget\VisibilityRules::rules');
 
 add_action('plugins_loaded', '\Layered\IfWidget\WidgetVisibility::start');
 add_action('plugins_loaded', '\Layered\IfWidget\Admin::start');

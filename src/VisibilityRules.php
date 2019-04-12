@@ -3,8 +3,13 @@ namespace Layered\IfWidget;
 
 class VisibilityRules {
 
-	public static function user(array $rules) {
+	public static function rules(array $rules) {
+		return array_merge($rules, self::user(), self::page(), self::url(), self::device());
+	}
+
+	protected static function user() {
 		global $wp_roles;
+		$rules = [];
 
 
 		// Rule - user auth state
@@ -39,10 +44,20 @@ class VisibilityRules {
 			];
 		}
 
+		// Rule - user registration
+		$rules['users-can-register'] = [
+			'name'		=>	__('User registration %s allowed', 'if-widget'),
+			'group'		=>	__('User', 'if-widget'),
+			'callback'	=>	function() {
+				return (bool) get_option('users_can_register');
+			}
+		];
+
 		return $rules;
 	}
 
-	public static function page(array $rules) {
+	protected static function page() {
+		$rules = [];
 
 		// Visibility Rule - Post types
 		$postTypes = array_map(function($postType) {
@@ -79,7 +94,8 @@ class VisibilityRules {
 		return $rules;
 	}
 
-	public static function url(array $rules) {
+	protected static function url() {
+		$rules = [];
 
 		// Visibility Rule - URL match
 		$rules['url'] = [
@@ -95,11 +111,12 @@ class VisibilityRules {
 		return $rules;
 	}
 
-	public static function device(array $rules) {
+	protected static function device() {
+		$rules = [];
 
 		// Visibility Rule - Is mobile
 		$rules['is-mobile'] = [
-			'name'			=>	__('Device %s mobile', 'if-widget'),
+			'name'			=>	__('%s mobile device', 'if-widget'),
 			'callback'		=>	'wp_is_mobile',
 			'group'			=>	__('Device', 'if-widget')
 		];
