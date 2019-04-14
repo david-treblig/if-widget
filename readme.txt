@@ -2,7 +2,7 @@
 Contributors: andreiigna
 Tags: widget, visibility, rules, roles, hide, if, show, display
 Requires at least: 4
-Tested up to: 5.1
+Tested up to: 5.2
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -77,6 +77,7 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.3 - 30 April 2019 =
 * Added - Visibility rule - Users can register
 * Added - Support for paid Addon, which adds more visibility rules
 
