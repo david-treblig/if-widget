@@ -98,16 +98,29 @@ jQuery(function($) {
 						});
 					},
 					setRule: function(v, rule) {
-						v.rule = rule;
-						v.isOpen = false;
-						v.values = [1];
+						if (rule.callback === '__return_true') {
+							var dialog = $('.if-widget-dialog').dialog({
+								dialogClass:	'if-widget-dialog-promo',
+								draggable:		false,
+								modal:			true,
+								width:			450
+							});
 
-						if (rule.type === 'select') {
-							v.values.push(Object.keys(rule.options)[0]);
-						} else if (rule.type === 'multiple') {
-							v.values.push([]);
-						} else if (rule.type === 'text') {
-							v.values.push('');
+							$('.if-widget-dialog').find('.button').click(function() {
+								dialog.dialog('close');
+							});
+						} else {
+							v.rule = rule;
+							v.isOpen = false;
+							v.values = [1];
+
+							if (rule.type === 'select') {
+								v.values.push(Object.keys(rule.options)[0]);
+							} else if (rule.type === 'multiple') {
+								v.values.push([]);
+							} else if (rule.type === 'text') {
+								v.values.push('');
+							}
 						}
 					}
 				}

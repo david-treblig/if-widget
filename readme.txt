@@ -77,6 +77,9 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Added - Visibility rule - Users can register
+* Added - Support for paid Addon, which adds more visibility rules
+
 = 0.2 - 2 March 2019 =
 * Updated - Plugin texts
 * Updated - Compatibility with WordPress 5.1

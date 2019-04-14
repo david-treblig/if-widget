@@ -21,7 +21,7 @@ class WidgetVisibility {
 			wp_enqueue_script('vuejs', 'https://cdn.jsdelivr.net/npm/vue@2.6', [], '2.6');
 			wp_enqueue_script('v-runtime-template', plugins_url('assets/v-runtime-template.min.js', dirname(__FILE__)), ['vuejs'], '1.5.1');
 			wp_enqueue_script('sprintf', plugins_url('assets/sprintf.min.js', dirname(__FILE__)), [], '1.1.2');
-			wp_enqueue_script('if-widget', plugins_url('assets/if-widget.js', dirname(__FILE__)), ['vuejs', 'sprintf'], '0.1');
+			wp_enqueue_script('if-widget', plugins_url('assets/if-widget.js', dirname(__FILE__)), ['vuejs', 'sprintf', 'jquery-ui-dialog'], '0.1');
 			wp_localize_script('if-widget', 'ifWidget', [
 				'rules'		=>	apply_filters('if_visibility_rules', []),
 				'texts'		=>	[
@@ -37,7 +37,7 @@ class WidgetVisibility {
 				]
 			]);
 
-			wp_enqueue_style('if-widget', plugins_url('assets/if-widget.css', dirname(__FILE__)), [], '0.1');
+			wp_enqueue_style('if-widget', plugins_url('assets/if-widget.css', dirname(__FILE__)), ['wp-jquery-ui-dialog'], '0.1');
 		}
 	}
 
@@ -54,7 +54,7 @@ class WidgetVisibility {
 
 		<div class="if-widget-visibility-rules" id="if-widget-visibility-rules-<?php echo $widget->id ?>" v-cloak>
 			<p>
-				<a href="<?php echo admin_url('themes.php?page=if-widget') ?>" class="if-widget-help" data-tooltip="<?php esc_attr_e('Visibility rule examples', 'if-widget') ?>" title="<?php esc_attr_e('Visibility rule examples', 'if-widget') ?>"><span class="dashicons dashicons-editor-help"></span></a>
+				<a href="<?php echo admin_url('themes.php?page=if-widget') ?>" class="if-widget-help if-widget-float-right" data-tooltip="<?php esc_attr_e('Visibility rule examples', 'if-widget') ?>" title="<?php esc_attr_e('Visibility rule examples', 'if-widget') ?>"><span class="dashicons dashicons-editor-help"></span></a>
 				<label><input type="checkbox" name="<?php echo esc_attr($widget->get_field_name('if-widget-enabled')) ?>" class="if-widget-is-enabled" <?php checked($visibility) ?> v-model="enabled"> <?php _e('Show widget only if', 'if-widget') ?> »</label>
 			</p>
 
@@ -65,7 +65,7 @@ class WidgetVisibility {
 						<span class="remove" v-show="visibility.length > 1" @click="visibility.splice(Math.max(index - 1, 0), 2)">-</span>
 						<v-runtime-template :template="formatRule(v.rule, index)"></v-runtime-template>
 						<ul class="options">
-							<li v-for="(rule, ruleId) in rules" :class="{selected: v.rule == rule}" v-html="formatName(rule)" @click="setRule(v, rule)"></li>
+							<li v-for="(rule, ruleId) in rules" :class="{selected: v.rule == rule, promo: rule.callback === '__return_true'}" v-html="formatName(rule)" @click="setRule(v, rule)"></li>
 						</ul>
 					</div>
 

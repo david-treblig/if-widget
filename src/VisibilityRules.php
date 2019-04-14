@@ -15,8 +15,8 @@ class VisibilityRules {
 		// Rule - user auth state
 		$rules['user-logged-in'] = [
 			'name'		=>	__('User %s logged in', 'if-widget'),
-			'callback'	=>	'is_user_logged_in',
-			'group'		=>	__('User', 'if-widget')
+			'group'		=>	__('User', 'if-widget'),
+			'callback'	=>	'is_user_logged_in'
 		];
 
 
@@ -28,12 +28,12 @@ class VisibilityRules {
 		$rules['user-role'] = [
 			'name'		=>	__('User role %s one of %s', 'if-widget'),
 			'type'		=>	'multiple',
+			'group'		=>	__('User', 'if-widget'),
 			'options'	=>	$roleOptions,
 			'callback'	=>	function(array $roles) {
 				global $current_user;
 				return is_user_logged_in() && count(array_intersect($roles, $current_user->roles));
-			},
-			'group'		=>	__('User', 'if-widget')
+			}
 		];
 
 		if (defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE === true) {

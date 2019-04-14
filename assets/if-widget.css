@@ -1,6 +1,19 @@
 
 :root {
 	--if-widget-color: #460d8d;
+	--if-widget-color-border: rgba(70, 13, 141, 0.3);
+	--if-widget-color-bg: rgba(70, 13, 141, 0.2);
+	--if-widget-color-bg2: rgba(70, 13, 141, 0.07);
+
+	--if-widget-color-red: #e04c4c;
+	--if-widget-color-red10: rgb(224, 76, 76, 0.1);
+
+	--if-widget-color-green: #50a92f;
+	--if-widget-color-green10: rgba(80, 169, 47, 0.1);
+}
+
+.if-widget-color {
+	color: var(--if-widget-color);
 }
 
 .if-widget-text-center {
@@ -10,6 +23,11 @@
 .if-widget-text-right {
 	text-align: right;
 }
+
+.if-widget-float-right {
+	float: right;
+}
+
 
 
 /* Admin page */
@@ -24,76 +42,92 @@
 }
 
 .if-widget-wrap ul li {
-    line-height: 1.4rem;
+	line-height: 1.4rem;
 }
 
-.if-widget-wrap .about-text {
-	margin-right: 0;
-	min-height: auto;
-}
 
-.if-widget-wrap .two-col,
-.if-widget-wrap .three-col {
-	align-items: flex-start;
-}
 
-.if-widget-wrap .feature-box {
+.if-widget-wrap .feature-section .col {
 	background: #f9f9f9;
-	border-radius: 0.5rem;
-	padding: 1rem;
-	box-shadow: 0px 2px 4px -2px rgba(0,0,0,0.15);
-	transition: 0.2s;
+	border-radius: 3px;
+	padding: 1rem 1.5rem;
+	border: 1px solid #d1d5da;
 	cursor: default;
-	color: #666;
 }
 
-.if-widget-wrap .feature-box h3 {
-	color: var(--if-widget-color);
-	margin: 0 0 1rem;
+.if-widget-wrap .feature-section .col.addon-promo {
+	background: var(--if-widget-color-bg2);
+	border: 1px dashed var(--if-widget-color-border);
+	flex: 10%;
 }
 
-.if-widget-wrap .feature-box h3 .dashicons {
-	margin-top: 6px;
+.if-widget-wrap .feature-section .col.addon-manage {
+	background: var(--if-widget-color-bg2);
+	border: 1px solid var(--if-widget-color-border);
+	flex: 10%;
 }
 
-.if-widget-wrap .feature-box li {
-	margin: 0;
-	color: #333;
-	line-height: 1.9;
+.if-widget-wrap .feature-section h3 {
+	font-weight: 300;
 }
 
-.if-widget-wrap .feature-box code {
-	font-size: 13px;
-	background-color: rgba(70, 13, 141, 0.07);
-}
-
-.if-widget-help {
+.if-widget-wrap .feature-section .price {
 	float: right;
+	margin-top: 5px;
+	font-size: 22px;
 }
+
+.if-widget-wrap .feature-section .price small {
+	color: #777;
+}
+
+.if-widget-wrap .feature-section a {
+	text-decoration: none;
+}
+
+.if-widget-wrap .feature-section ul {
+	padding: 0;
+	margin-bottom: 0.1rem;
+}
+
+.if-widget-wrap .feature-section li {
+	padding: 0.3rem 0 0.3rem 1.2rem;
+	position: relative;
+	margin: 0;
+	list-style: none;
+}
+
+.if-widget-wrap .feature-section li:before {
+	content: "✓";
+	position: absolute;
+	color: #0073aa;
+	left: 0;
+}
+
+.if-widget-wrap .feature-section ul ul {
+	margin-top: 0.3rem;
+}
+
+.if-widget-wrap .feature-section li li:before {
+	color: #cfcfcf;
+	content: "›";
+}
+
+
+
+/* Widget visibility control */
 
 .if-widget-help span {
 	text-decoration: none;
 	color: #c0c0c0;
 }
 
-
-
-
-/* Widget visibility control */
-
 .if-widget-line {
 	border: 0;
-	border-top: 1px solid rgba(70, 13, 141, 0.07);
+	border-top: 1px solid var(--if-widget-color-bg2);
 }
 
 .if-widget-visibility-rules {
-	--if-widget-color-border: rgba(70, 13, 141, 0.3);
-	--if-widget-color-bg: rgba(70, 13, 141, 0.2);
-	--if-widget-color-bg2: rgba(70, 13, 141, 0.07);
-	--if-widget-color-red: #e04c4c;
-	--if-widget-color-red10: rgb(224, 76, 76, 0.1);
-	--if-widget-color-green: #50a92f;
-	--if-widget-color-green10: rgba(80, 169, 47, 0.1);
 	margin-bottom: 15px;
 }
 
@@ -269,6 +303,10 @@
 	transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
 }
 
+.if-widget-visibility-rule .options li::first-letter {
+	text-transform: capitalize;
+}
+
 .if-widget-visibility-rule .options li:hover,
 .if-widget-visibility-rule .options li.selected {
 	background-color: var(--if-widget-color-bg2);
@@ -278,6 +316,10 @@
 
 .if-widget-visibility-rule .options li.selected:hover {
 	background-color: var(--if-widget-color-bg);
+}
+
+.if-widget-visibility-rule .options li.promo {
+	background: #fff3cd;
 }
 
 .if-widget-visibility-rule .options li.group {
@@ -326,6 +368,22 @@
 	background-color: var(--if-widget-color-bg);
 	color: #262626;
 }
+
+
+.if-widget-dialog-promo .ui-dialog-titlebar {
+	padding: 3rem 0;
+	background: url(https://layered.market/uploads/if-widget-banner.jpg);
+	background-size: cover;
+}
+
+.if-widget-dialog-promo .ui-dialog-title {
+	text-align: center;
+	display: block;
+	color: #fff;
+	font-size: 1.8rem;
+	text-shadow: 0px 0px 20px rgb(0, 0, 0);
+}
+
 
 
 

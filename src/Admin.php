@@ -64,62 +64,58 @@ class Admin {
 		?>
 
 		<div class="wrap about-wrap if-widget-wrap">
+			<a href="<?php echo admin_url('widgets.php') ?>" class="button button-secondary if-widget-float-right"><?php _e('Manage Widgets', 'if-widget') ?></a>
 			<h1>If Widget</h1>
 			<p class="about-text"><?php printf(__('Thanks for using the %s plugin! Now you can display tailored widgets to each visitor, based on visibility rules. Here are a few examples:', 'if-widget'), '<strong>If Widget</strong>') ?></p>
+			<ul class="list">
+				<li><?php _e('Display Logout link for logged-in users:', 'if-widget') ?> <code><?php _e('Show widget if', 'if-widget') ?> <span class="if-widget-color"><?php _e('User <u>is</u> logged in', 'if-widget') ?></span></code></li>
+				<li><?php _e('Hide Login or Register widget for logged-in users:', 'if-widget') ?> <code><?php _e('Show widget if', 'if-widget') ?> <span class="if-widget-color"><?php _e('User <u>is not</u> logged in', 'if-widget') ?></span></code></li>
+				<li><?php _e('Show a widget on phones:', 'if-widget') ?> <code><?php _e('Show widget if', 'if-widget') ?> <span class="if-widget-color"><?php _e('<u>Is</u> mobile device', 'if-widget') ?></span></code></li>
+				<li><?php _e('Show widget for users in US and Canada:', 'if-widget') ?> <code><?php _e('Show widget if', 'if-widget') ?> <span class="if-widget-color"><?php _e('User <u>is</u> from country: <u>US, CA</u>', 'if-widget') ?></span></code></li>
+				<li><?php _e('Show widget for visitors browsing in English or Spanish:', 'if-widget') ?> <code><?php _e('Show widget if', 'if-widget') ?> <span class="if-widget-color"><?php _e('Language <u>is</u>: English, Spanish', 'if-widget') ?></span></code></li>
+				<li><?php _e('Show widget only on Contact page:', 'if-widget') ?> <code><?php _e('Show widget if', 'if-widget') ?> <span class="if-widget-color"><?php _e('URL <u>contains</u> <u>/contact</u>', 'if-widget') ?></span></code></li>
+			</ul>
+			<p><?php printf(__('Visibility rules can be added to widgets by activating the "%s" option when editing any widget.', 'if-widget'), '<strong>' . __('Show widget if', 'if-widget') . '</strong>') ?></p>
+
 			<hr class="wp-header-end">
 
-			<div class="feature-section three-col">
+			<div class="feature-section two-col">
 				<div class="col">
-					<div class="feature-box">
-						<h3><span class="dashicons dashicons-admin-users"></span> <?php _e('By User', 'if-widget') ?></h3>
-						<p><?php _e('Display or hide widgets based on user info:', 'if-widget') ?></p>
-						<ul>
-							<li><code><?php _e('Show widget if user is/isn\'t logged in', 'if-widget') ?></code></li>
-							<li><code><?php _e('Show widget only for Admins/Editors', 'if-widget') ?></code></li>
-							<li><code><?php _e('Show widget only for Super Admin (WP Multisite)', 'if-widget') ?></code></li>
-						</ul>
-					</div>
+					<h3><?php _e('<strong>If Widget</strong> plugin', 'if-widget') ?></h3>
+					
+					<ul>
+						<li>
+							<?php _e('User visibility rules', 'if-widget') ?>
+							<ul>
+								<li><?php _e('Visitor is logged in or out', 'if-widget') ?></li>
+								<li><?php _e('Is Admin, Editor, Author or Shop Manager', 'if-widget') ?></li>
+								<li><?php _e('Is registration allowed', 'if-widget') ?></li>
+							</ul>
+						</li>
+						<li>
+							<?php _e('Page visibility rules', 'if-widget') ?>
+							<ul>
+								<li><?php _e('Page - is Front or Blog page', 'if-widget') ?></li>
+								<li><?php _e('Page - current URL starts with or matches "keyword"', 'if-widget') ?></li>
+								<li><?php _e('Visitor device - detect mobile or desktop', 'if-widget') ?></li>
+							</ul>
+						</li>
+						<li><?php _e('Support on WordPress forum', 'if-widget') ?></li>
+					</ul>
 				</div>
 
-				<div class="col">
-					<div class="feature-box">
-						<h3><span class="dashicons dashicons-admin-page"></span> <?php _e('By Page', 'if-widget') ?></h3>
-						<p><?php _e('Display or hide widgets based on current page info:', 'if-widget') ?></p>
-						<ul>
-							<li><code><?php _e('Show widget only on Front Page', 'if-widget') ?></code></li>
-							<li><code><?php _e('Show widget only on Blog Page', 'if-widget') ?></code></li>
-							<li><code><?php _e('Show widget only on Posts or Events pages', 'if-widget') ?></code></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="col">
-					<div class="feature-box">
-						<h3><span class="dashicons dashicons-laptop"></span> <?php _e('By Browser', 'if-widget') ?></h3>
-						<p><?php _e('Show widgets only for visitors like:', 'if-widget') ?></p>
-						<ul>
-							<li><code><?php _e('Show widget only when browsing from Mobile', 'if-widget') ?></code></li>
-							<li><code><?php _e('Hide widget if current URL includes \'keyword\'', 'if-widget') ?></code></li>
-						</ul>
-					</div>
-				</div>
+				<?php do_action('admin_more_visibility_rules') ?>
 			</div>
 
-			<p><?php printf(__('Visibility rules can be added to widgets by activating the "%s" option when editing any widget.', 'if-widget'), '<strong>' . __('Show widget only if', 'if-widget') . '</strong>') ?></p>
 			<br>
-			<p class="if-widget-text-center">
-				<a href="<?php echo admin_url('widgets.php') ?>" class="button button-primary"><?php _e('Manage Widgets', 'if-widget') ?></a>
-			</p>
 
-			<?php do_action('if_widget_page_content') ?>
+			<hr>
 
-			<br><br><br><br><hr>
-
-			<p class="if-widget-text-right">
+			<p>
 				<strong>If Widget</strong>:
 				<a href="https://wordpress.org/plugins/if-widget/#faq" target="wpplugins"><?php _e('FAQs', 'if-widget') ?></a> &middot;
-				<a href="https://wordpress.org/plugins/if-widget/#reviews" target="wpplugins"><?php _e('Reviews', 'if-widget') ?></a> &middot;
-				<a href="https://wordpress.org/support/plugin/if-widget" target="wpplugins"><?php _e('Support', 'if-widget') ?></a>
+				<a href="https://wordpress.org/support/plugin/if-widget" target="wpplugins"><?php _e('Support forum', 'if-widget') ?></a> &middot;
+				<span class="dashicons dashicons-star-filled" style="color: #ffb900"></span> <a href="https://wordpress.org/plugins/if-widget/#reviews" target="wpplugins"><?php _e('Leave a review', 'if-widget') ?></a>
 			</p>
 		</div>
 		<?php
