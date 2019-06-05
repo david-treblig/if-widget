@@ -8,34 +8,44 @@ Stable tag: trunk
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Display tailored widgets to each visitor with visibility rules
+Control what widgets your site’s visitors see, with custom visibility rules
 
 == Description ==
 
-Control what widgets your site's visitors see, based on visibility rules. Here are a few examples:
+With [If Widget](https://layered.market/plugins/if-widget) you can control on which pages widgets are shown. Show or hide widgets with custom visibility rules (no PHP or technical knowledge required).
 
-* Display a widget only if current `User is logged in`
-* Hide widgets if `Device is mobile`
-* Display widgets for `Admins and Editors`
-* Hide Login or Register widgets for `Logged in Users`
+The plugin is easy to use, each widget will have a new option “Show widget only if” which will enable the selection of visibility rules (example in Screenshots). Visibility rules can be combined with `AND`/`OR` to create even more personalised visibility options.
 
-The plugin is easy to use, each widget will have a new option “Show widget only if” which will enable the selection of rules (example in Screenshots)
+= Examples =
 
-## Features
+* Display a widget only if **User is logged in**
+* Hide widgets if **Is mobile device** `OR` **Visitor is from US**
+* Display widgets only for **Admins and Editors**
+* Hide Login or Register widgets for **Logged in Users**
+* Show widget only for **Admins** `AND` **Is not mobile device**
 
-* Basic set of visibility rules
-  * User state `User is logged in`
-  * User roles `Admin` `Editor` `Author` etc
-  * Page type `Front page` `Blog page`
-  * Post type `Post` `Page` `Product` etc
-  * Visitor device `Is Mobile`
-  * Current URL contains or ends with word `your-product`
-* Multiple rules - mix multiple rules for a widget visibility
-  * show if `User is logged in` AND `Device is mobile`
-  * show if `User is Admin` AND `Is Front page`
-* Support for adding custom visibility rules
+= Visibility Rules =
 
-Example of adding a new visibility rule is described in the FAQ section
+These are the visibility rules you can add for widgets:
+
+* User state: `User is logged in`
+* User role: `User is Admin or Editor` (plus all the available roles)
+* User registration: `User registration is allowed`
+* Post type: `Current post type is Post or Product`
+* Page type: `Current page is Front Page or Blog Page`
+* URL: `Current URL starts/ends with "this-page"`
+* URL: `Current URL contains with "keyword"`
+* Device detection: `Is mobile device`
+* Visitor location: `Visitor is from US or Spain` ✱
+* Visitor language: `Visitor language is English or Spanish` ✱
+* Third-party plugin integrations: `Show if user is in Group "Group Name"`, `Show if user has Subscription "Example Subscription"` and more ✱
+
+= More Visibility Rules Add-on =
+
+The paid Add-on provides more visibility rules and priority support.
+**Visibility Rules**: unlock all visibility rules like: visitor location, membership status, user groups and more. Examples marked with ✱ above.
+**Support**: get one-on-one email support for any questions you may have about installing and configuring our plugins.
+Get [More Visibility Rules](https://layered.market/plugins/more-visibility-rules).
 
 == Frequently Asked Questions ==
 
@@ -45,7 +55,7 @@ On Widgets editing page, each widget will have a section for controlling visibil
 
 = How can I add a custom visibility rule for menu items? =
 
-New rules can be added by any other plugin or theme.
+New rules can be added by code in any other plugin or theme.
 
 Example of adding a new custom rule for displaying/hiding a widget when current page is a custom-post-type.
 
@@ -53,7 +63,7 @@ Example of adding a new custom rule for displaying/hiding a widget when current 
 // theme's functions.php or plugin file
 add_filter('if_visibility_rules', 'my_new_visibility_rule');
 
-function my_new_visibility_rule($rules) {
+function my_new_visibility_rule(array $rules) {
 
   $rules['single-my-custom-post-type'] = array(
     'name'      =>  __('Single my-CPT', 'i18n-domain'),     // name of the condition
@@ -72,8 +82,9 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Screenshots ==
 
-1. Enable of visibility rules for Widgets
+1. Enable and choose visibility rules for Widgets
 2. Visibility rules
+3. Mix multiple visibility rules
 
 == Changelog ==
 
