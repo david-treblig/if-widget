@@ -47,12 +47,17 @@
 
 
 
+.if-widget-wrap .feature-section {
+	display: flex;
+}
+
 .if-widget-wrap .feature-section .col {
 	background: #f9f9f9;
 	border-radius: 3px;
 	padding: 1rem 1.5rem;
 	border: 1px solid #d1d5da;
 	cursor: default;
+	margin: 0 0.5rem;
 }
 
 .if-widget-wrap .feature-section .col.addon-promo {
@@ -69,6 +74,7 @@
 
 .if-widget-wrap .feature-section h3 {
 	font-weight: 300;
+	margin-top: 0;
 }
 
 .if-widget-wrap .feature-section .price {

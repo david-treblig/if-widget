@@ -43,7 +43,7 @@ These are the visibility rules you can add for widgets:
 = More Visibility Rules Add-on =
 
 The paid Add-on provides more visibility rules and priority support.
-**Visibility Rules**: unlock all visibility rules like: visitor location, membership status, user groups and more. Examples marked with ✱ above.
+**Visibility Rules**: unlock all visibility rules like: visitor location, membership status, user groups and more. A few examples are marked with ✱ above.
 **Support**: get one-on-one email support for any questions you may have about installing and configuring our plugins.
 Get [More Visibility Rules](https://layered.market/plugins/more-visibility-rules).
 
@@ -88,7 +88,7 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
-= 0.3 - 30 April 2019 =
+= 0.3 - 5 July 2019 =
 * Added - Visibility rule - Users can register
 * Added - Support for paid Addon, which adds more visibility rules
 

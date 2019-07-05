@@ -9,7 +9,6 @@ class Admin {
 
 	protected function __construct() {
 		add_action('admin_enqueue_scripts', [$this, 'assets']);
-		add_action('admin_init', [$this, 'actions']);
 		add_action('admin_menu', [$this, 'menu']);
 		add_action('admin_notices', [$this, 'notices']);
 		add_filter('plugin_action_links_if-widget/if-widget.php', [$this, 'actionLinks']);
@@ -19,14 +18,6 @@ class Admin {
 		if (get_current_screen()->id === 'appearance_page_if-widget') {
 			wp_enqueue_style('if-widget', plugins_url('assets/if-widget.css', dirname(__FILE__)), [], '0.1');
 		}
-	}
-
-	public function actions() {
-
-		if (isset($_POST['if-widget-action'])) {
-			// do this
-		}
-
 	}
 
 	public function menu() {
