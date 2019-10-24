@@ -175,7 +175,6 @@
 
 .if-widget-visibility-rule .selection .type-op {
 	border: 0;
-	box-shadow: none;
 	background: var(--if-widget-color-bg2);
 	height: 26px;
 	color: var(--if-widget-color);
@@ -355,8 +354,6 @@
 
 .if-widget-visibility-rule-op span {
 	background-color: #f5f7f7;
-	border: 0;
-	outline: 0;
 	color: #555;
 	border-radius: 10px;
 	margin: 5px 3px;

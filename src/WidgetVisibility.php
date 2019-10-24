@@ -38,7 +38,7 @@ class WidgetVisibility {
 				]
 			]);
 
-			wp_enqueue_style('if-widget', plugins_url('assets/if-widget.css', dirname(__FILE__)), ['wp-jquery-ui-dialog'], '0.1');
+			wp_enqueue_style('if-widget', plugins_url('assets/if-widget.css', dirname(__FILE__)), ['wp-jquery-ui-dialog'], '0.4');
 		}
 	}
 

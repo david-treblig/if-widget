@@ -3,7 +3,7 @@
 Plugin Name: If Widget - Visibility control for Widgets
 Plugin URI: https://layered.market/plugins/if-widget
 Description: Control what widgets your site’s visitors see, with custom visibility rules
-Version: 0.3
+Version: 0.4
 Text Domain: if-widget
 Author: Layered
 Author URI: https://layered.market
