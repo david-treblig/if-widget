@@ -21,7 +21,7 @@ class WidgetVisibility {
 			wp_enqueue_script('vuejs', 'https://cdn.jsdelivr.net/npm/vue@2.6', [], '2.6');
 			wp_enqueue_script('v-runtime-template', plugins_url('assets/v-runtime-template.min.js', dirname(__FILE__)), ['vuejs'], '1.5.1');
 			wp_enqueue_script('sprintf', plugins_url('assets/sprintf.min.js', dirname(__FILE__)), [], '1.1.2');
-			wp_enqueue_script('if-widget', plugins_url('assets/if-widget.js', dirname(__FILE__)), ['vuejs', 'sprintf', 'jquery-ui-dialog'], '0.1');
+			wp_enqueue_script('if-widget', plugins_url('assets/if-widget.js', dirname(__FILE__)), ['vuejs', 'sprintf', 'jquery-ui-dialog'], '0.4');
 			wp_localize_script('if-widget', 'ifWidget', [
 				'rules'		=>	apply_filters('if_visibility_rules', []),
 				'texts'		=>	[
@@ -31,6 +31,7 @@ class WidgetVisibility {
 					'equals'		=>	__('equals', 'if-widget'),
 					'starts with'	=>	__('starts with', 'if-widget'),
 					'contains'		=>	__('contains', 'if-widget'),
+					'nocontains'	=>	__('doesn\'t contain', 'if-widget'),
 					'equals'		=>	__('equals', 'if-widget'),
 					'not equal'		=>	__('not equal', 'if-widget'),
 					'select'		=>	__('select', 'if-widget')
@@ -128,6 +129,8 @@ class WidgetVisibility {
 							$visibilityRule['result'] = substr($text, -strlen($visibilityRule['values'][1])) === $visibilityRule['values'][1];
 						} elseif ($visibilityRule['values'][0] == 'contains') {
 							$visibilityRule['result'] = strpos($text, $visibilityRule['values'][1]) !== false;
+						} elseif ($visibilityRule['values'][0] == 'nocontains') {
+							$visibilityRule['result'] = strpos($text, $visibilityRule['values'][1]) === false;
 						} elseif ($visibilityRule['values'][0] == 1) {
 							$visibilityRule['result'] = $text == $visibilityRule['values'][1];
 						} elseif ($visibilityRule['values'][0] == 0) {

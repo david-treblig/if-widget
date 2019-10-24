@@ -88,6 +88,8 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Updated - Text Visibility rule option: Text doesn't contain
+
 = 0.3 - 5 July 2019 =
 * Added - Visibility rule - Users can register
 * Added - Support for paid Addon, which adds more visibility rules
