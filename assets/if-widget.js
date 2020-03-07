@@ -3,12 +3,12 @@ jQuery(function($) {
 
 	// Add Visibility Rules to elements
 	function addVisibilityRules() {
-		$('.widget-liquid-right .if-widget-visibility-rules:not(.has-if-widget)').each(function() {
+		$('.widget-liquid-right .if-widget-visibility-rules:not(.has-if-widget), .customize-control-widget_form .if-widget-visibility-rules:not(.has-if-widget)').each(function() {
 			var $el = $(this).addClass('has-if-widget');
 
 			new Vue({
 				el: '#' + $el.attr('id'),
-				components: {VRuntimeTemplate},
+				components: {vRuntimeTemplate},
 				data: {
 					rules: ifWidget.rules,
 					texts: ifWidget.texts,
@@ -33,13 +33,17 @@ jQuery(function($) {
 				computed: {
 					vis: function() {
 						var q = JSON.parse(JSON.stringify(this.visibility));
+
 						if (this.$el) {
+
+							// don't trigger input change on widget load
 							if (this.shouldTriggerChange) {
-								jQuery(this.$el).trigger('change');
+								jQuery(this.$el).find('.if-widget-the-rules').trigger('change');
 							} else {
 								this.shouldTriggerChange = true;
 							}
 						}
+
 						return JSON.stringify(q.map(function(v) {
 							if (v.type == 'rule') {
 								v.rule = v.rule.id;
@@ -130,7 +134,8 @@ jQuery(function($) {
 
 
 	addVisibilityRules();
-	$(document).ajaxStop(addVisibilityRules);
+	$(document).on('widget-added', addVisibilityRules);
+	$(document).on('widget-updated', addVisibilityRules);
 
 
 });

@@ -178,6 +178,7 @@
 	background: var(--if-widget-color-bg2);
 	height: 26px;
 	color: var(--if-widget-color);
+	width: auto;
 }
 
 .if-widget-visibility-rule .selection .type-value {
