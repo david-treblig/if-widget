@@ -87,6 +87,7 @@ class Admin {
 							<?php _e('Page visibility rules', 'if-widget') ?>
 							<ul>
 								<li><?php _e('Page - is Front or Blog page', 'if-widget') ?></li>
+								<li><?php _e('Page - is Archive page', 'if-widget') ?></li>
 								<li><?php _e('Page - current URL starts with or matches "keyword"', 'if-widget') ?></li>
 								<li><?php _e('Visitor device - detect mobile or desktop', 'if-widget') ?></li>
 							</ul>
@@ -98,9 +99,7 @@ class Admin {
 				<?php do_action('admin_more_visibility_rules') ?>
 			</div>
 
-			<br>
-
-			<hr>
+			<br><hr>
 
 			<p>
 				<strong>If Widget</strong>:

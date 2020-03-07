@@ -17,7 +17,7 @@ class Addon {
 	}
 
 	public function getPluginUrl() {
-		return 'https://layered.market/plugins/more-visibility-rules?site=' . urlencode(site_url());
+		return 'https://layered.market/plugins/more-visibility-rules?site=' . urlencode(site_url()) . '&utm_source=if-widget&utm_medium=upgrade&utm_campaign=Upgrade%20from%20WordPress';
 	}
 
 	public function sectionPromo() {
