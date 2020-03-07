@@ -2,7 +2,7 @@
 Contributors: andreiigna
 Tags: widget, visibility, rules, roles, hide, if, show, display
 Requires at least: 4
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -82,13 +82,16 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Screenshots ==
 
-1. Enable and choose visibility rules for Widgets
-2. Visibility rules
-3. Mix multiple visibility rules
+1. If Widget plugin demo
+2. Enable and choose visibility rules for Widgets
+3. Visibility rules
+4. Mix multiple visibility rules
 
 == Changelog ==
 
+= 0.5 - 7 March 2020 =
 * Added - Visibility rule - Is Archive page (checks for year/month/category archive page)
+* Updated - Ensure compatibility with WordPress 5.4
 * Fixed - Vsibility rules control in Customizer
 
 = 0.4 - 24 October 2019 =

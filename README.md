@@ -1,13 +1,13 @@
 If Widget
 =========
 
-**If Widget** is a WordPress plugin which adds extra functionality for widgets, making it easy to hide or display them based on visibility rules. Example:
+**If Widget** is a WordPress plugin which adds extra functionality for widgets, making it easy to hide or display them based on visibility rules. Examples:
 
 * Display a widget only if current `User is logged in`
 * Hide widget if `visiting from mobile device`
 * Display widgets only for `Admins and Editors`
 
-The plugin is easy to use, each widget will have a “Show widget only if” option which will enable the selection of rules.
+The plugin is easy to use, each widget will have a “Show widget only if” option which will enable the selection of visibility rules.
 
 > This repo is used only for development, downloading & installing from here won't work as expected. Install from [WordPress.org plugin page](https://wordpress.org/plugins/if-widget/)
 
@@ -50,7 +50,6 @@ function my_new_visibility_rule($rules) {
 ```
 
 
-
 ## WordPress.org
 
-Head over to [plugin's page on WordPress.org](https://wordpress.org/plugins/if-widget/) for more info, reviews and support
+Head over to [plugin's page on WordPress.org](https://wordpress.org/plugins/if-widget/) for more info, reviews and support.

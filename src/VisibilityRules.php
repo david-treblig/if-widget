@@ -63,7 +63,7 @@ class VisibilityRules {
 		$postTypes = array_map(function($postType) {
 			return $postType->labels->singular_name;
 			return $postType->labels->name;
-		}, get_post_types([], 'objects'));
+		}, get_post_types(['public' => true], 'objects'));
 
 		$rules['post-type'] = [
 			'name'		=>	__('Post type %s one of %s', 'if-widget'),

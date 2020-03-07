@@ -19,7 +19,7 @@ class WidgetVisibility {
 
 		if ($pagenow === 'widgets.php' || $pagenow === 'customize.php') {
 			wp_enqueue_script('vuejs', 'https://cdn.jsdelivr.net/npm/vue@2.6', [], '2.6');
-			wp_enqueue_script('v-runtime-template', plugins_url('assets/v-runtime-template.min.js', dirname(__FILE__)), ['vuejs'], '1.5.1');
+			wp_enqueue_script('v-runtime-template', plugins_url('assets/v-runtime-template.min.js', dirname(__FILE__)), ['vuejs'], '1.10.0');
 			wp_enqueue_script('sprintf', plugins_url('assets/sprintf.min.js', dirname(__FILE__)), [], '1.1.2');
 			wp_enqueue_script('if-widget', plugins_url('assets/if-widget.js', dirname(__FILE__)), ['vuejs', 'sprintf', 'jquery-ui-dialog'], '0.5');
 			wp_localize_script('if-widget', 'ifWidget', [
