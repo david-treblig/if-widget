@@ -32,11 +32,11 @@ The plugin is easy to use, each widget will have a “Show widget only if” opt
 Custom visibility rules can be added easily by any plugin or theme.
 Example of adding a new rule for displaying/hiding a widget when current page is a custom-post-type.
 
-```
+```php
 // theme's functions.php or plugin file
 add_filter('if_visibility_rules', 'my_new_visibility_rule');
 
-function my_new_visibility_rule($rules) {
+function my_new_visibility_rule(array $rules) {
 
   $rules['single-my-custom-post-type'] = array(
     'name'      =>  __('Single my-CPT', 'i18n-domain'),     // name of the condition
