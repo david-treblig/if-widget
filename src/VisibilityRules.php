@@ -91,6 +91,13 @@ class VisibilityRules {
 			'group'		=>	__('Page type', 'if-widget')
 		];
 
+		// Visibility Rule - Page archive
+		$rules['page-archive'] = [
+			'name'		=>	__('%s archive page', 'if-widget'),
+			'group'		=>	__('Page type', 'if-widget'),
+			'callback'	=>	'is_archive',
+		];
+
 		return $rules;
 	}
 

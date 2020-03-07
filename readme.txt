@@ -88,6 +88,8 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Added - Visibility rule - Is Archive page (checks for year/month/category archive page)
+
 = 0.4 - 24 October 2019 =
 * Updated - Text Visibility rule option: Text doesn't contain
 * Updated - Ensure compatibility with WordPress 5.3
