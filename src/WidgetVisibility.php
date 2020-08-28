@@ -42,7 +42,7 @@ class WidgetVisibility {
 		}
 	}
 
-	public function form(\WP_Widget $widget, $return, array $instance) {
+	public function form(\WP_Widget $widget, $return, $instance) {
 		$visibility = isset($instance['if-widget']) && $instance['if-widget'];
 		$visibilityRules = $visibility ? json_decode($instance['if-widget'], true) : [[
 			'type'		=>	'rule',
@@ -87,7 +87,7 @@ class WidgetVisibility {
 		<?php
 	}
 
-	public function update(array $instance, array $newInstance) {
+	public function update($instance, $newInstance) {
 
 		if (isset($newInstance['if-widget-enabled'])) {
 			$instance['if-widget'] = $newInstance['if-widget'];
@@ -98,7 +98,7 @@ class WidgetVisibility {
 		return $instance;
 	}
 
-	public function checkWidgetVisibility(array $instance, \WP_Widget $widget) {
+	public function checkWidgetVisibility($instance, \WP_Widget $widget) {
 
 		if (isset($instance['if-widget'])) {
 			$visibilityRules = json_decode($instance['if-widget'], true);
